@@ -5,7 +5,7 @@ function ProtectedRoute({ children }: { children: ReactNode }) {
   const isAuthenticated = Boolean(localStorage.getItem("accessToken"));
 
   if (!isAuthenticated) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/login" replace />;
   }
 
   return children;
