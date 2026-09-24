@@ -17,7 +17,6 @@ function App() {
   return (
     <>
       <Header />
-
       <main>
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -33,7 +32,6 @@ function App() {
           />
         </Routes>
       </main>
-
       <Footer />
     </>
   );
