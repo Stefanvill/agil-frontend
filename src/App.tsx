@@ -5,6 +5,7 @@ import "./App.css";
 import { Route, Routes } from "react-router";
 import { LoginPage } from "./pages/LoginPage";
 import { TestPage } from "./pages/TestPage";
+import { WelcomePage } from "./pages/WelcomePage";
 
 function HomePage() {
   return <h1>Home page</h1>;
@@ -30,7 +31,15 @@ function App() {
               <ProtectedRoute>
                 <ProductsPage />
               </ProtectedRoute>
-            }//
+            }
+          />
+          <Route
+            path="/welcome"
+            element={
+              <ProtectedRoute>
+                <WelcomePage />
+              </ProtectedRoute>
+            }
           />
         </Routes>
       </main>
