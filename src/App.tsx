@@ -6,14 +6,15 @@ import { Route, Routes } from "react-router";
 import { LoginPage } from "./pages/LoginPage";
 import { TestPage } from "./pages/TestPage";
 import { WelcomePage } from "./pages/WelcomePage";
+import { ProductsPage } from "./pages/ProductsPage";
 
 function HomePage() {
   return <h1>Home page</h1>;
 }
 
-function ProductsPage() {
-  return <h1>Products page</h1>;
-}
+// function ProductsPage() {
+//   return <h1>Products page</h1>;
+// }
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/products" element={<ProductsPage />} />
           <Route path="/test" element={<TestPage />} />
 
           <Route
@@ -40,6 +42,7 @@ function App() {
                 <WelcomePage />
               </ProtectedRoute>
             }
+            } //
           />
         </Routes>
       </main>
