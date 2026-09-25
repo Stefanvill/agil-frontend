@@ -51,7 +51,10 @@ export default function LoginForm() {
             className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             
             />
-            <button type="submit" disabled={loading} bg-blue-600 text-white rounded-lg px-4 py-2 hover:bg-blue-700 disabled:bg-gray-400>
+            <button 
+            type="submit" 
+            disabled={loading} 
+            className="bg-blue-600 text-white rounded-lg px-4 py-2 hover:bg-blue-700 disabled:bg-gray-400">
                 {loading ? "Loggar in..." : "Logga in"}
             </button>
             
