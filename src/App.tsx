@@ -30,7 +30,7 @@ function App() {
               <ProtectedRoute>
                 <ProductsPage />
               </ProtectedRoute>
-            }
+            }//
           />
         </Routes>
       </main>
