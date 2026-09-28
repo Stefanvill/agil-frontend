@@ -12,6 +12,10 @@ export async function getProducts(): Promise<productType[]> {
     },
   });
 
+  if (!response.ok) {
+    throw new Error("Kunde inte hämta produkterna.");
+  }
+
   const data = await response.json();
 
   return data;
