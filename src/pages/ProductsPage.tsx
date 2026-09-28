@@ -3,14 +3,18 @@ import type { productType } from "../types/product";
 import { getProducts } from "../service/productService";
 import ProductCard from "../components/ProductCard";
 
-// const [products, setProducts] = useState<productType[]>([]);
-
 export function ProductsPage() {
   const [products, setProducts] = useState<productType[]>([]);
+  const [error, setError] = useState<string | null>(null);
+
   useEffect(() => {
     async function loadProducts() {
-      const data = await getProducts();
-      setProducts(data);
+      try {
+        const data = await getProducts();
+        setProducts(data);
+      } catch (error) {
+        setError("Det gick inte att hämta produkterna.");
+      }
     }
     loadProducts();
   }, []);
@@ -19,9 +23,14 @@ export function ProductsPage() {
     <div>
       <h1>Produkter</h1>
 
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
+      {error && <p>{error}</p>}
+
+      {!error && products.length === 0 && <p>Inga produkter hittades.</p>}
+
+      {!error &&
+        products.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
     </div>
   );
 }
