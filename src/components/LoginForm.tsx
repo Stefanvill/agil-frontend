@@ -65,11 +65,6 @@ export default function LoginForm() {
         {loading ? "Loggar in..." : "Logga in"}
       </button>
 
-      {error && (
-        <p role="alert" className="text-red-600 text-sm">
-          {error}
-        </p>
-      )}
 
       {error && (
         <p role="alert" className="text-red-600 text-sm">
