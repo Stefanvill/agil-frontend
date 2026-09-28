@@ -42,7 +42,7 @@ function App() {
                 <WelcomePage />
               </ProtectedRoute>
             }
-            } //
+            
           />
         </Routes>
       </main>
