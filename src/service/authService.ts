@@ -4,34 +4,34 @@ const API_BASE = import.meta.env.VITE_API_BASE_URL;
 const TOKEN_KEY = "access_token";
 
 export async function login(credentials: LoginRequest): Promise<LoginResponse> {
-    const response = await fetch(`${API_BASE}/auth/login`, {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(credentials),
-        });
+  const response = await fetch(`${API_BASE}/auth/login`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(credentials),
+  });
 
-        if(!response.ok) {
-            if (response.status == 401 || response.status === 403) {
-                throw new Error("Fel användarnamn eller lösenord");
-            } throw new Error ("Något gick fel");
-        };
+  if (!response.ok) {
+    if (response.status == 401 || response.status === 403) {
+      throw new Error("Fel användarnamn eller lösenord");
+    }
+    throw new Error("Något gick fel");
+  }
 
-        const data: LoginResponse = await response.json();
-        sessionStorage.setItem(TOKEN_KEY, data.accessToken);
+  const data: LoginResponse = await response.json();
+  console.log(data);
+  sessionStorage.setItem(TOKEN_KEY, data.token);
 
-        return data;
-
+  return data;
 }
 
 export function logout() {
-    sessionStorage.removeItem(TOKEN_KEY);
+  sessionStorage.removeItem(TOKEN_KEY);
 }
 
 export function getToken(): string | null {
-    return sessionStorage.getItem(TOKEN_KEY);
-
+  return sessionStorage.getItem(TOKEN_KEY);
 }
 
 export function isAuthenticated(): boolean {
-    return getToken() !== null;
+  return getToken() !== null;
 }
