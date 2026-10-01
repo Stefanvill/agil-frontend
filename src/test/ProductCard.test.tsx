@@ -1,7 +1,8 @@
 import ProductCard from "../components/ProductCard";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
-import type { productType } from "../types/product";
+
+const onAdd = vi.fn();
 
 describe("ProductCard-tester", () => {
   it("visar produktens namn", () => {
@@ -13,9 +14,7 @@ describe("ProductCard-tester", () => {
       stock: 10,
     };
 
-    render(<ProductCard product={product} onAdd={function (product: productType): void {
-      throw new Error("Function not implemented.");
-    } } />);
+    render(<ProductCard product={product} onAdd={onAdd} />);
 
     expect(screen.getByRole("heading", { name: "Laptop" })).toBeInTheDocument();
   });
@@ -29,9 +28,7 @@ describe("ProductCard-tester", () => {
       stock: 10,
     };
 
-    render(<ProductCard product={product} onAdd={function (product: productType): void {
-      throw new Error("Function not implemented.");
-    } } />);
+    render(<ProductCard product={product} onAdd={onAdd} />);
 
     expect(screen.getByText("En kraftfull laptop")).toBeInTheDocument();
   });
@@ -45,9 +42,7 @@ describe("ProductCard-tester", () => {
       stock: 10,
     };
 
-    render(<ProductCard product={product} onAdd={function (product: productType): void {
-      throw new Error("Function not implemented.");
-    } } />);
+    render(<ProductCard product={product} onAdd={onAdd} />);
 
     expect(screen.getByText("2500 kr")).toBeInTheDocument();
   });
