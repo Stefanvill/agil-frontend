@@ -15,7 +15,7 @@ export function ProductsPage() {
       try {
         const data = await getProducts();
         setProducts(data);
-      } catch (error) {
+      } catch /*(error)*/ {
         setError("Det gick inte att hämta produkterna.");
       }
     }
