@@ -1,4 +1,4 @@
-import Header from "./components/Header";
+import { Header } from "./components/Header";
 import Footer from "./components/Footer";
 import ProtectedRoute from "./components/ProtectedRoute";
 import "./App.css";
@@ -13,9 +13,6 @@ function HomePage() {
   return <h1>Home page</h1>;
 }
 
-// function ProductsPage() {
-//   return <h1>Products page</h1>;
-// }
 
 function App() {
   return (
