@@ -18,8 +18,9 @@ function HomePage() {
 
 function App() {
   return (
-    <>
+    <div className="app">
       <Header />
+
       <main>
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -34,6 +35,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+
           <Route
             path="/welcome"
             element={
@@ -41,12 +43,12 @@ function App() {
                 <WelcomePage />
               </ProtectedRoute>
             }
-            
           />
         </Routes>
       </main>
+
       <Footer />
-    </>
+    </div>
   );
 }
 
