@@ -1,4 +1,4 @@
-import type { CartItem, productType } from "../types/product";
+import type { CartItem } from "../types/product";
 
 type CartProps = {
   item: CartItem[];
@@ -25,9 +25,13 @@ const Cart = ({ item, onIncrease, onDecrease }: CartProps) => {
           <article key={item.id}>
             <h3>{item.name}</h3>
 
+            <p>Pris: {item.price.toFixed(2)} kr</p>
+
             <button onClick={() => onDecrease(item.id)}>-</button>
             <span>{item.quantity}</span>
             <button onClick={() => onIncrease(item.id)}>+</button>
+
+            <p>Radpris: {lineTotal.toFixed(2)} kr</p>
           </article>
         );
       })}

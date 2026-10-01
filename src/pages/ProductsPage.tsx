@@ -15,7 +15,7 @@ export function ProductsPage() {
       try {
         const data = await getProducts();
         setProducts(data);
-      } catch (error) {
+      } catch /*(error)*/ {
         setError("Det gick inte att hämta produkterna.");
       }
     }
@@ -31,13 +31,22 @@ export function ProductsPage() {
       alert(`${product.name} har lagts i kundvagnen`);
       return;
     }
+    
+    const currentItem = cartItems[index];
 
-    const cartItem: CartItem = {
-      ...product,
-      quantity: 1,
+    if (currentItem.quantity >= currentItem.stock) {
+      alert("Det finns inte fler produkter i lager.");
+      return;
+    }
+
+    const updatedItems = [...cartItems];
+
+    updatedItems[index] = {
+      ...currentItem,
+      quantity: currentItem.quantity + 1,
     };
 
-    setCartItems((currentItems) => [...currentItems, cartItem]);
+    setCartItems(updatedItems);
 
     alert(`${product.name} har lagts i kundvagnen`);
   }
