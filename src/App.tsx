@@ -8,6 +8,7 @@ import { TestPage } from "./pages/TestPage";
 import { WelcomePage } from "./pages/WelcomePage";
 import { ProductsPage } from "./pages/ProductsPage";
 import { AdminPage } from "./pages/AdminPage";
+import AdminProductPage from "./pages/AdminProductPage";
 
 function HomePage() {
   return <h1>Home page</h1>;
@@ -39,6 +40,15 @@ function App() {
             element={
               <ProtectedRoute requiredRole="ADMIN">
                 <AdminPage />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/admin/product"
+            element={
+              <ProtectedRoute requiredRole="ADMIN">
+                <AdminProductPage />
               </ProtectedRoute>
             }
           />
