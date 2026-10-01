@@ -18,7 +18,7 @@ describe("ProductCard-tester", () => {
 
     expect(screen.getByRole("heading", { name: "Laptop" })).toBeInTheDocument();
   });
-
+ 
   it("visar produktens beskrivning", () => {
     const product = {
       id: 1,
@@ -32,7 +32,7 @@ describe("ProductCard-tester", () => {
 
     expect(screen.getByText("En kraftfull laptop")).toBeInTheDocument();
   });
-
+ 
   it("visar produktens pris", () => {
     const product = {
       id: 1,
@@ -42,8 +42,10 @@ describe("ProductCard-tester", () => {
       stock: 10,
     };
 
+  
     render(<ProductCard product={product} onAdd={onAdd} />);
 
     expect(screen.getByText("2500 kr")).toBeInTheDocument();
   });
 });
+ 

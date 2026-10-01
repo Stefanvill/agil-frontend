@@ -20,6 +20,7 @@ export async function login(credentials: LoginRequest): Promise<LoginResponse> {
   const data: LoginResponse = await response.json();
   console.log(data);
   sessionStorage.setItem(TOKEN_KEY, data.token);
+  sessionStorage.setItem("loginResponse", JSON.stringify(data));
 
   return data;
 }
@@ -34,4 +35,16 @@ export function getToken(): string | null {
 
 export function isAuthenticated(): boolean {
   return getToken() !== null;
+}
+
+export function hasRole(requiredRole: string): boolean {
+  const storedResponse = sessionStorage.getItem("loginResponse");
+
+  if (storedResponse === null) {
+    return false;
+  }
+
+  const loginResponse: LoginResponse = JSON.parse(storedResponse);
+
+  return loginResponse.roles.includes(requiredRole);
 }
