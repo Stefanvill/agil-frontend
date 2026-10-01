@@ -7,6 +7,10 @@ export function AdminPage() {
   const [products, setProducts] = useState<productType[]>([]);
   const [error, setError] = useState<string | null>(null);
 
+  const handleAdd = (product: productType) => {
+    console.log("Produkt tillagd i kundvagnen:", product.name);
+  };
+
   useEffect(() => {
     async function loadProducts() {
       try {
@@ -30,7 +34,11 @@ export function AdminPage() {
 
       {!error &&
         products.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard
+            key={product.id}
+            product={product}
+            onAdd={handleAdd}
+          />
         ))}
     </div>
   );
