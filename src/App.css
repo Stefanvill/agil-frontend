@@ -4,27 +4,43 @@
   flex-direction: column;
 }
 
-header {
-  background-color: lightblue;
+.header {
+  background-color: #B6D6CC;
+  color: #26332F;
+  padding: 24px;
+  text-align: center;
+}
+
+.header h1 {
+  font-size: 30px;
+  margin-bottom: 16px;
 }
 
 .header-links {
   display: flex;
+  justify-content: center;
   gap: 20px;
 }
 
 .header-links a {
-  color: blueviolet;
+  color: #40534C;
   text-decoration: none;
 }
 
 .header-links a:hover {
   text-decoration: underline;
 }
+
 main {
   flex: 1;
+  background-color: #F5F1EA;
+  color: #26332F;
 }
 
-footer {
-  background-color: lightgray;
+.footer {
+  background-color: #40534C;
+  color: #FFFFFF;
+  text-align: center;
+  padding: 24px 16px;
+  margin-top: 32px;
 }

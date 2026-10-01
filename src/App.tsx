@@ -18,13 +18,13 @@ function HomePage() {
 
 function App() {
   return (
-    <>
+    <div className="app">
       <Header />
+
       <main>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/products" element={<ProductsPage />} />
           <Route path="/test" element={<TestPage />} />
 
           <Route
@@ -35,6 +35,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+
           <Route
             path="/welcome"
             element={
@@ -42,12 +43,12 @@ function App() {
                 <WelcomePage />
               </ProtectedRoute>
             }
-            
           />
         </Routes>
       </main>
+
       <Footer />
-    </>
+    </div>
   );
 }
 
