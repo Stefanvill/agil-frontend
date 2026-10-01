@@ -34,11 +34,7 @@ export function AdminPage() {
 
       {!error &&
         products.map((product) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            onAdd={handleAdd}
-          />
+          <ProductCard key={product.id} product={product} onAdd={handleAdd} />
         ))}
     </div>
   );
