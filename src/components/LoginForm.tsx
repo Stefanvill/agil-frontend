@@ -6,10 +6,9 @@ export default function LoginForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
-
-  const [loading, setLoading] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -21,8 +20,13 @@ export default function LoginForm() {
         username,
         password,
       });
+
       sessionStorage.setItem("username", username);
-      sessionStorage.setItem("loginResponse", JSON.stringify(loginResponse));
+      sessionStorage.setItem(
+        "loginResponse",
+        JSON.stringify(loginResponse)
+      );
+
       navigate("/welcome");
     } catch (error) {
       if (error instanceof Error) {
@@ -36,41 +40,46 @@ export default function LoginForm() {
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="flex flex-col gap-4 w-full max-w-sm"
-    >
-      <input
-        type="text"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        placeholder="Användarnamn"
-        required
-        className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
+    <form onSubmit={handleSubmit} className="login-form">
 
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Lösenord"
-        required
-        className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
+      <div className="login-field">
+        <label htmlFor="username">Användarnamn</label>
+        <input
+          id="username"
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          placeholder="Ange användarnamn"
+          required
+        />
+      </div>
+
+      <div className="login-field">
+        <label htmlFor="password">Lösenord</label>
+        <input
+          id="password"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Ange lösenord"
+          required
+        />
+      </div>
+
+      {error && (
+        <p role="alert" className="login-error">
+          {error}
+        </p>
+      )}
+
       <button
         type="submit"
         disabled={loading}
-        className="bg-blue-600 text-white rounded-lg px-4 py-2 hover:bg-blue-700 disabled:bg-gray-400"
+        className="login-button"
       >
         {loading ? "Loggar in..." : "Logga in"}
       </button>
 
-
-      {error && (
-        <p role="alert" className="text-red-600 text-sm">
-          {error}
-        </p>
-      )}
     </form>
   );
 }
