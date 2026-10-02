@@ -19,7 +19,7 @@ export function AdminPage() {
       try {
         const data = await getProducts();
         setProducts(data);
-      } catch (error) {
+      } catch {
         setError("Det gick inte att hämta produkterna.");
       }
     }
