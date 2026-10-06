@@ -1,4 +1,4 @@
-import Header from "./components/Header";
+import { Header } from "./components/Header";
 import Footer from "./components/Footer";
 import ProtectedRoute from "./components/ProtectedRoute";
 import "./App.css";
@@ -8,14 +8,12 @@ import { TestPage } from "./pages/TestPage";
 import { WelcomePage } from "./pages/WelcomePage";
 import { ProductsPage } from "./pages/ProductsPage";
 import { AdminPage } from "./pages/AdminPage";
+import AdminProductPage from "./pages/AdminProductPage";
 
 function HomePage() {
   return <h1>Home page</h1>;
 }
 
-// function ProductsPage() {
-//   return <h1>Products page</h1>;
-// }
 
 function App() {
   return (
@@ -42,6 +40,15 @@ function App() {
             element={
               <ProtectedRoute requiredRole="ADMIN">
                 <AdminPage />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/admin/product"
+            element={
+              <ProtectedRoute requiredRole="ADMIN">
+                <AdminProductPage />
               </ProtectedRoute>
             }
           />
