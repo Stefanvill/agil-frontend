@@ -10,6 +10,16 @@ export function ProductsPage() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [showCart, setShowCart] = useState(false);
 
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const filteredProducts = products.filter(
+    (product) =>
+      selectedCategory === null || product.category === selectedCategory,
+  );
+
+  const categories = products.map((product) => product.category);
+  const uniqueCategories = [...new Set(categories)];
+  console.log(uniqueCategories);
+
   useEffect(() => {
     async function loadProducts() {
       try {
@@ -31,7 +41,7 @@ export function ProductsPage() {
       alert(`${product.name} har lagts i kundvagnen`);
       return;
     }
-    
+
     const currentItem = cartItems[index];
 
     if (currentItem.quantity >= currentItem.stock) {
@@ -92,6 +102,18 @@ export function ProductsPage() {
   return (
     <div>
       <h1>Produkter</h1>
+      <select
+        value={selectedCategory ?? ""}
+        onChange={(e) => setSelectedCategory(e.target.value || null)}
+      >
+        <option value="">Alla kategorier</option>
+
+        {uniqueCategories.map((category) => (
+          <option key={category} value={category}>
+            {category}
+          </option>
+        ))}
+      </select>
 
       {error && <p>{error}</p>}
 
@@ -106,7 +128,7 @@ export function ProductsPage() {
       )}
 
       {!error &&
-        products.map((product) => (
+        filteredProducts.map((product) => (
           <ProductCard key={product.id} product={product} onAdd={addToCart} />
         ))}
       <button onClick={() => setShowCart(!showCart)}>

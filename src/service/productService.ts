@@ -6,6 +6,7 @@ const API_URL = import.meta.env.VITE_API_PRODUCT_SERVICE_URL;
 export type CreateProductRequest = {
   name: string;
   description: string;
+  category: string;
   price: number;
   stock: number;
 };
@@ -29,7 +30,7 @@ export async function getProducts(): Promise<productType[]> {
 }
 
 export async function createProduct(
-  product: CreateProductRequest
+  product: CreateProductRequest,
 ): Promise<productType> {
   const token = getToken();
 
