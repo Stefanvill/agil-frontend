@@ -1,12 +1,18 @@
-import { Link, useLocation } from "react-router-dom";
-import { hasRole } from "../service/authService";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { hasRole, logout } from "../service/authService";
 
 export function Header() {
   useLocation();
+  const navigate = useNavigate();
 
   const isAdmin = hasRole("ADMIN");
   const isUser = hasRole("USER");
   const hasAccess = isAdmin || isUser;
+
+  const handleLogout = () => {
+  logout();
+  navigate("/login");
+};
 
   return (
     <header className="header">
@@ -19,7 +25,9 @@ export function Header() {
         {hasAccess && (
           <>
             <Link to="/products">Products</Link>
-            <Link to="/logout">Logout</Link>
+            <Link to="/logout" onClick={handleLogout}>
+              Logout
+            </Link>
 
             {isAdmin && <Link to="/admin">Admin</Link>}
           </>
