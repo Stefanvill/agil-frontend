@@ -10,15 +10,14 @@ describe("ProductCard-tester", () => {
       description: "En kraftfull laptop",
       price: 2500,
       stock: 10,
+      category: "Laptop",
     };
 
     const onAdd = vi.fn();
 
     render(<ProductCard product={product} onAdd={onAdd} />);
 
-    expect(
-      screen.getByRole("heading", { name: "Laptop" })
-    ).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Laptop" })).toBeInTheDocument();
   });
 
   it("visar produktens beskrivning", () => {
@@ -28,15 +27,14 @@ describe("ProductCard-tester", () => {
       description: "En kraftfull laptop",
       price: 2500,
       stock: 10,
+      category: "Laptop",
     };
 
     const onAdd = vi.fn();
 
     render(<ProductCard product={product} onAdd={onAdd} />);
 
-    expect(
-      screen.getByText("En kraftfull laptop")
-    ).toBeInTheDocument();
+    expect(screen.getByText("En kraftfull laptop")).toBeInTheDocument();
   });
 
   it("visar produktens pris", () => {
@@ -46,6 +44,7 @@ describe("ProductCard-tester", () => {
       description: "En kraftfull laptop",
       price: 2500,
       stock: 10,
+      category: "Laptop",
     };
 
     const onAdd = vi.fn();
@@ -62,6 +61,7 @@ describe("ProductCard-tester", () => {
       description: "En kraftfull laptop",
       price: 2500,
       stock: 10,
+      category: "Laptop",
     };
 
     const onAdd = vi.fn();
@@ -73,4 +73,3 @@ describe("ProductCard-tester", () => {
     expect(onAdd).toHaveBeenCalledWith(product);
   });
 });
- 

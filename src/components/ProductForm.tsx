@@ -12,6 +12,7 @@ function ProductForm({ onSuccess }: ProductFormProps) {
   const [formData, setFormData] = useState<CreateProductRequest>({
     name: "",
     description: "",
+    category: "",
     price: 0,
     stock: 0,
   });
@@ -21,18 +22,13 @@ function ProductForm({ onSuccess }: ProductFormProps) {
   const [loading, setLoading] = useState(false);
 
   function handleChange(
-    event: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement
-    >
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) {
     const { name, value } = event.target;
 
     setFormData((previous) => ({
       ...previous,
-      [name]:
-        name === "price" || name === "stock"
-          ? Number(value)
-          : value,
+      [name]: name === "price" || name === "stock" ? Number(value) : value,
     }));
   }
 
@@ -42,9 +38,13 @@ function ProductForm({ onSuccess }: ProductFormProps) {
     setError(null);
     setSuccess(null);
 
-    
     if (!formData.name.trim()) {
       setError("Namn måste anges.");
+      return;
+    }
+
+    if (!formData.category.trim()) {
+      setError("Kategori måste anges.");
       return;
     }
 
@@ -98,6 +98,17 @@ function ProductForm({ onSuccess }: ProductFormProps) {
           id="description"
           name="description"
           value={formData.description}
+          onChange={handleChange}
+          disabled={loading}
+        />
+      </div>
+      <div>
+        <label htmlFor={"category"}>Kategori</label>
+        <input
+          id={"category"}
+          name={"category"}
+          type="text"
+          value={formData.category}
           onChange={handleChange}
           disabled={loading}
         />
