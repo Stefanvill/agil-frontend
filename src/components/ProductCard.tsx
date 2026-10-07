@@ -13,7 +13,7 @@ function ProductCard({ product, onAdd }: ProductCardProps) {
       {product.category && <small>Kategori: {product.category}</small>}
       <p>{product.description}</p>
       <strong>{product.price} kr</strong>
-      <button onClick={() => onAdd(product)}>Lägg i kundvagnen</button>
+      <button onClick={() => onAdd(product)}>Add to cart</button>
       <Link to={`/products/${product.id}`}>Show product</Link>
     </article>
   );

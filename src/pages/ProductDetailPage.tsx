@@ -15,7 +15,7 @@ export function ProductDetailPage() {
         const data = await getProductById(id);
         setProduct(data);
       } catch {
-        setError("Det gick inte att hämta produkten.");
+        setError("Could not load the product.");
       }
     }
 
