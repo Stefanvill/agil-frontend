@@ -70,8 +70,9 @@ function ProductForm({ onSuccess }: ProductFormProps) {
 
       setSuccess("Produkten skapades!");
 
+
       onSuccess();
-    } catch (error) {
+    } catch {
       setError("Det gick inte att skapa produkten.");
     } finally {
       setLoading(false);

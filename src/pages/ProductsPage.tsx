@@ -9,17 +9,23 @@ export function ProductsPage() {
   const [error, setError] = useState<string | null>(null);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [showCart, setShowCart] = useState(false);
-
+  const [selectedSearch, setSelectedSearch] = useState<string | "">("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const filteredProducts = products.filter(
-    (product) =>
-      selectedCategory === null || product.category === selectedCategory,
-  );
 
   const categories = products.map((product) => product.category);
   const uniqueCategories = [...new Set(categories)];
   console.log(uniqueCategories);
+  const search = selectedSearch.toLowerCase();
 
+  const filteredProducts = products.filter((product) => {
+    const matchesCategory =
+      selectedCategory === null || product.category === selectedCategory;
+    const matchesSearch =
+      product.name.toLowerCase().includes(search) ||
+      product.description.toLowerCase().includes(search);
+    //
+    return matchesCategory && matchesSearch;
+  });
   useEffect(() => {
     async function loadProducts() {
       try {
@@ -102,6 +108,13 @@ export function ProductsPage() {
   return (
     <div>
       <h1>Produkter</h1>
+      <input
+        type="search"
+        placeholder="Search products..."
+        value={selectedSearch}
+        onChange={(e) => setSelectedSearch(e.target.value)}
+      />
+
       <select
         value={selectedCategory ?? ""}
         onChange={(e) => setSelectedCategory(e.target.value || null)}
