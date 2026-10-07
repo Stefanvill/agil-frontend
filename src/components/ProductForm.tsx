@@ -15,6 +15,7 @@ function ProductForm({ onSuccess }: ProductFormProps) {
     category: "",
     price: 0,
     stock: 0,
+    imageUrl: "",
   });
 
   const [error, setError] = useState<string | null>(null);
@@ -45,6 +46,11 @@ function ProductForm({ onSuccess }: ProductFormProps) {
 
     if (!formData.category.trim()) {
       setError("Kategori måste anges.");
+      return;
+    }
+
+    if (!formData.imageUrl.trim()) {
+      setError("Bild-URL måste anges.");
       return;
     }
 
@@ -103,6 +109,7 @@ function ProductForm({ onSuccess }: ProductFormProps) {
           disabled={loading}
         />
       </div>
+
       <div>
         <label htmlFor={"category"}>Kategori</label>
         <input
@@ -110,6 +117,18 @@ function ProductForm({ onSuccess }: ProductFormProps) {
           name={"category"}
           type="text"
           value={formData.category}
+          onChange={handleChange}
+          disabled={loading}
+        />
+      </div>
+
+      <div>
+        <label htmlFor="imageUrl">Bild-URL</label>
+        <input
+          id="imageUrl"
+          name="imageUrl"
+          type="url"
+          value={formData.imageUrl}
           onChange={handleChange}
           disabled={loading}
         />

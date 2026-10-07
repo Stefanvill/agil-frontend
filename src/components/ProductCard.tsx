@@ -8,6 +8,7 @@ type ProductCardProps = {
 function ProductCard({ product, onAdd }: ProductCardProps) {
   return (
     <article>
+      <img src={product.imageUrl} alt={product.name} />
       <h2>{product.name}</h2>
       {product.category && <small>Kategori: {product.category}</small>}
       <p>{product.description}</p>

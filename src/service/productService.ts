@@ -9,6 +9,7 @@ export type CreateProductRequest = {
   category: string;
   price: number;
   stock: number;
+  imageUrl: string;
 };
 
 export async function getProducts(): Promise<productType[]> {
