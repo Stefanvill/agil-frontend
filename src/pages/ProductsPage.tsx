@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import type { CartItem, productType } from "../types/product";
 import { getProducts } from "../service/productService";
 import { createOrder } from "../service/orderService";
+import { createOrder } from "../service/orderService";
 import ProductCard from "../components/ProductCard";
 import Cart from "../components/Cart";
 

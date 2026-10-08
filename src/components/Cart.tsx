@@ -36,7 +36,7 @@ const Cart = ({ item, onIncrease, onDecrease, onCheckout }: CartProps) => {
           </article>
         );
       })}
-      <strong>Totalt: {totalPrice.toFixed(2)} kr</strong>
+      <strong>Total: {totalPrice.toFixed(2)} kr</strong>
       <button onClick={onCheckout}>Skicka beställning</button>
     </section>
   );
