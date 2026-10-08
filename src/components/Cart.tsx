@@ -12,12 +12,12 @@ const Cart = ({ item, onIncrease, onDecrease }: CartProps) => {
     0,
   );
   if (item.length === 0) {
-    return <p>Kundvagnen är tom.</p>;
+    return <p>Your cart is empty.</p>;
   }
 
   return (
     <section>
-      <h2>Kundvagn</h2>
+      <h2>Cart</h2>
 
       {item.map((item) => {
         const lineTotal = item.price * item.quantity;
@@ -25,17 +25,17 @@ const Cart = ({ item, onIncrease, onDecrease }: CartProps) => {
           <article key={item.id}>
             <h3>{item.name}</h3>
 
-            <p>Pris: {item.price.toFixed(2)} kr</p>
+            <p>Price: {item.price.toFixed(2)} kr</p>
 
             <button onClick={() => onDecrease(item.id)}>-</button>
             <span>{item.quantity}</span>
             <button onClick={() => onIncrease(item.id)}>+</button>
 
-            <p>Radpris: {lineTotal.toFixed(2)} kr</p>
+            <p>Subtotal: {lineTotal.toFixed(2)} kr</p>
           </article>
         );
       })}
-      <strong>Totalt: {totalPrice.toFixed(2)} kr</strong>
+      <strong>Total: {totalPrice.toFixed(2)} kr</strong>
     </section>
   );
 };

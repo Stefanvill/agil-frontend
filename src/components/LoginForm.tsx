@@ -32,7 +32,7 @@ export default function LoginForm() {
       if (error instanceof Error) {
         setError(error.message);
       } else {
-        setError("Något gick fel vid inloggningen.");
+        setError("Something went wrong while logging in.");
       }
     } finally {
       setLoading(false);
@@ -43,25 +43,25 @@ export default function LoginForm() {
     <form onSubmit={handleSubmit} className="login-form">
 
       <div className="login-field">
-        <label htmlFor="username">Användarnamn</label>
+        <label htmlFor="username">Username</label>
         <input
           id="username"
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          placeholder="Ange användarnamn"
+          placeholder="Enter username"
           required
         />
       </div>
 
       <div className="login-field">
-        <label htmlFor="password">Lösenord</label>
+        <label htmlFor="password">Password</label>
         <input
           id="password"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          placeholder="Ange lösenord"
+          placeholder="Enter password"
           required
         />
       </div>
@@ -77,7 +77,7 @@ export default function LoginForm() {
         disabled={loading}
         className="login-button"
       >
-        {loading ? "Loggar in..." : "Logga in"}
+        {loading ? "Logging in..." : "Log in"}
       </button>
 
     </form>
