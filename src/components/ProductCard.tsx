@@ -11,7 +11,7 @@ function ProductCard({ product, onAdd }: ProductCardProps) {
     <article>
       <img src={product.imageUrl} alt={product.name} />
       <h2>{product.name}</h2>
-      {product.category && <small>Kategori: {product.category}</small>}
+      {product.category && <small>Category: {product.category}</small>}
       <p>{product.description}</p>
       <strong>{product.price} kr</strong>
       <button onClick={() => onAdd(product)}>Add to cart</button>

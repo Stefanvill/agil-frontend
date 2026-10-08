@@ -40,32 +40,32 @@ function ProductForm({ onSuccess }: ProductFormProps) {
     setSuccess(null);
 
     if (!formData.name.trim()) {
-      setError("Namn måste anges.");
+      setError("Name is required.");
       return;
     }
 
     if (!formData.category.trim()) {
-      setError("Kategori måste anges.");
+      setError("Category is required.");
       return;
     }
 
     if (!formData.imageUrl.trim()) {
-      setError("Bild-URL måste anges.");
+      setError("Image URL is required.");
       return;
     }
 
     if (!formData.description.trim()) {
-      setError("Beskrivning måste anges.");
+      setError("Description is required.");
       return;
     }
 
     if (formData.price <= 0) {
-      setError("Priset måste vara större än 0.");
+      setError("Price must be greater than 0.");
       return;
     }
 
     if (formData.stock < 0) {
-      setError("Lagersaldo kan inte vara negativt.");
+      setError("Stock cannot be negative.");
       return;
     }
 
@@ -74,12 +74,12 @@ function ProductForm({ onSuccess }: ProductFormProps) {
 
       await createProduct(formData);
 
-      setSuccess("Produkten skapades!");
+      setSuccess("Product created!");
 
 
       onSuccess();
     } catch {
-      setError("Det gick inte att skapa produkten.");
+      setError("Could not create the product.");
     } finally {
       setLoading(false);
     }
@@ -88,7 +88,7 @@ function ProductForm({ onSuccess }: ProductFormProps) {
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="name">Namn</label>
+        <label htmlFor="name">Name</label>
         <input
           id="name"
           name="name"
@@ -100,7 +100,7 @@ function ProductForm({ onSuccess }: ProductFormProps) {
       </div>
 
       <div>
-        <label htmlFor="description">Beskrivning</label>
+        <label htmlFor="description">Description</label>
         <textarea
           id="description"
           name="description"
@@ -111,7 +111,7 @@ function ProductForm({ onSuccess }: ProductFormProps) {
       </div>
 
       <div>
-        <label htmlFor={"category"}>Kategori</label>
+        <label htmlFor={"category"}>Category</label>
         <input
           id={"category"}
           name={"category"}
@@ -123,7 +123,7 @@ function ProductForm({ onSuccess }: ProductFormProps) {
       </div>
 
       <div>
-        <label htmlFor="imageUrl">Bild-URL</label>
+        <label htmlFor="imageUrl">Image URL</label>
         <input
           id="imageUrl"
           name="imageUrl"
@@ -135,7 +135,7 @@ function ProductForm({ onSuccess }: ProductFormProps) {
       </div>
 
       <div>
-        <label htmlFor="price">Pris</label>
+        <label htmlFor="price">Price</label>
         <input
           id="price"
           name="price"
@@ -149,7 +149,7 @@ function ProductForm({ onSuccess }: ProductFormProps) {
       </div>
 
       <div>
-        <label htmlFor="stock">Lagersaldo</label>
+        <label htmlFor="stock">Stock</label>
         <input
           id="stock"
           name="stock"
@@ -165,7 +165,7 @@ function ProductForm({ onSuccess }: ProductFormProps) {
       {success && <p>{success}</p>}
 
       <button type="submit" disabled={loading}>
-        {loading ? "Skapar produkt..." : "Skapa produkt"}
+        {loading ? "Creating product..." : "Create product"}
       </button>
     </form>
   );

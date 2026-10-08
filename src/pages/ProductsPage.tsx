@@ -32,7 +32,7 @@ export function ProductsPage() {
         const data = await getProducts();
         setProducts(data);
       } catch /*(error)*/ {
-        setError("Det gick inte att hämta produkterna.");
+        setError("Could not load the products.");
       }
     }
     loadProducts();
@@ -44,14 +44,14 @@ export function ProductsPage() {
     if (index === -1) {
       const newItem = { ...product, quantity: 1 };
       setCartItems([...cartItems, newItem]);
-      alert(`${product.name} har lagts i kundvagnen`);
+      alert(`${product.name} has been added to the cart`);
       return;
     }
 
     const currentItem = cartItems[index];
 
     if (currentItem.quantity >= currentItem.stock) {
-      alert("Det finns inte fler produkter i lager.");
+      alert("No more items in stock.");
       return;
     }
 
@@ -64,7 +64,7 @@ export function ProductsPage() {
 
     setCartItems(updatedItems);
 
-    alert(`${product.name} har lagts i kundvagnen`);
+    alert(`${product.name} has been added to the cart`);
   }
 
   function decreaseQuantity(productId: number) {
@@ -93,7 +93,7 @@ export function ProductsPage() {
     const currentItem = cartItems[index];
 
     if (currentItem.quantity >= currentItem.stock) {
-      alert("Det finns inte fler produkter i lager.");
+      alert("No more items in stock.");
       return;
     }
 
@@ -107,7 +107,7 @@ export function ProductsPage() {
 
   return (
     <div>
-      <h1>Produkter</h1>
+      <h1>Products</h1>
       <input
         type="search"
         placeholder="Search products..."
@@ -119,7 +119,7 @@ export function ProductsPage() {
         value={selectedCategory ?? ""}
         onChange={(e) => setSelectedCategory(e.target.value || null)}
       >
-        <option value="">Alla kategorier</option>
+        <option value="">All categories</option>
 
         {uniqueCategories.map((category) => (
           <option key={category} value={category}>
@@ -130,7 +130,7 @@ export function ProductsPage() {
 
       {error && <p>{error}</p>}
 
-      {!error && products.length === 0 && <p>Inga produkter hittades.</p>}
+      {!error && products.length === 0 && <p>No products found.</p>}
 
       {showCart && (
         <Cart
@@ -145,7 +145,7 @@ export function ProductsPage() {
           <ProductCard key={product.id} product={product} onAdd={addToCart} />
         ))}
       <button onClick={() => setShowCart(!showCart)}>
-        {showCart ? "Dölj kundvagn" : "Visa kundvagn"}
+        {showCart ? "Hide cart" : "Show cart"}
       </button>
     </div>
   );

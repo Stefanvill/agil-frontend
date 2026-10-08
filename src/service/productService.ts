@@ -22,7 +22,7 @@ export async function getProducts(): Promise<productType[]> {
   });
 
   if (!response.ok) {
-    throw new Error("Kunde inte hämta produkterna.");
+    throw new Error("Could not fetch the products.");
   }
 
   const data = await response.json();
@@ -60,7 +60,7 @@ export async function createProduct(
   });
 
   if (!response.ok) {
-    throw new Error("Kunde inte skapa produkten.");
+    throw new Error("Could not create the product.");
   }
 
   const data = await response.json();
