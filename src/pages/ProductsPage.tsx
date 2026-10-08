@@ -120,7 +120,7 @@ export function ProductsPage() {
 
   async function handleCheckout() {
     if (cartItems.length === 0) {
-      alert("Kundvagnen är tom.");
+      alert("Cart is empty.");
       return;
     }
 
@@ -137,9 +137,9 @@ export function ProductsPage() {
       setCartItems([]);
       sessionStorage.removeItem("cart");
 
-      alert("Ordern har skapats.");
+      alert("The order has been created.");
     } catch {
-      alert("Något gick fel ordenskulle skapas.");
+      alert("Something whent wrong with creating the order.");
     }
   }
 
