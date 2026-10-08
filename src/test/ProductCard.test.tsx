@@ -3,12 +3,12 @@ import { describe, expect, it, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 
-describe("ProductCard-tester", () => {
-  it("visar produktens namn", () => {
+describe("ProductCard tests", () => {
+  it("shows the product name", () => {
     const product = {
       id: 1,
       name: "Laptop",
-      description: "En kraftfull laptop",
+      description: "A powerful laptop",
       price: 2500,
       stock: 10,
       category: "Laptop",
@@ -26,11 +26,11 @@ describe("ProductCard-tester", () => {
     expect(screen.getByRole("heading", { name: "Laptop" })).toBeInTheDocument();
   });
 
-  it("visar produktens beskrivning", () => {
+  it("shows the product description", () => {
     const product = {
       id: 1,
       name: "Laptop",
-      description: "En kraftfull laptop",
+      description: "A powerful laptop",
       price: 2500,
       stock: 10,
       category: "Laptop",
@@ -45,14 +45,14 @@ describe("ProductCard-tester", () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByText("En kraftfull laptop")).toBeInTheDocument();
+    expect(screen.getByText("A powerful laptop")).toBeInTheDocument();
   });
 
-  it("visar produktens pris", () => {
+  it("shows the product price", () => {
     const product = {
       id: 1,
       name: "Laptop",
-      description: "En kraftfull laptop",
+      description: "A powerful laptop",
       price: 2500,
       stock: 10,
       category: "Laptop",
@@ -70,11 +70,11 @@ describe("ProductCard-tester", () => {
     expect(screen.getByText("2500 kr")).toBeInTheDocument();
   });
 
-  it("anropar onAdd med rätt produkt vid klick", () => {
+  it("calls onAdd with the correct product on click", () => {
     const product = {
       id: 1,
       name: "Laptop",
-      description: "En kraftfull laptop",
+      description: "A powerful laptop",
       price: 2500,
       stock: 10,
       category: "Laptop",
