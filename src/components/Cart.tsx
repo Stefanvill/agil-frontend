@@ -4,9 +4,10 @@ type CartProps = {
   item: CartItem[];
   onIncrease: (productId: number) => void;
   onDecrease: (productId: number) => void;
+  onCheckout: () => void;
 };
 
-const Cart = ({ item, onIncrease, onDecrease }: CartProps) => {
+const Cart = ({ item, onIncrease, onDecrease, onCheckout }: CartProps) => {
   const totalPrice = item.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0,
@@ -36,6 +37,7 @@ const Cart = ({ item, onIncrease, onDecrease }: CartProps) => {
         );
       })}
       <strong>Total: {totalPrice.toFixed(2)} kr</strong>
+      <button onClick={onCheckout}>Skicka beställning</button>
     </section>
   );
 };
