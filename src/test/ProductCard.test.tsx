@@ -1,6 +1,7 @@
 import ProductCard from "../components/ProductCard";
 import { describe, expect, it, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
+import { MemoryRouter } from "react-router";
 
 describe("ProductCard-tester", () => {
   it("visar produktens namn", () => {
@@ -16,7 +17,11 @@ describe("ProductCard-tester", () => {
 
     const onAdd = vi.fn();
 
-    render(<ProductCard product={product} onAdd={onAdd} />);
+    render(
+      <MemoryRouter>
+        <ProductCard product={product} onAdd={onAdd} />
+      </MemoryRouter>
+    );
 
     expect(screen.getByRole("heading", { name: "Laptop" })).toBeInTheDocument();
   });
@@ -34,7 +39,11 @@ describe("ProductCard-tester", () => {
 
     const onAdd = vi.fn();
 
-    render(<ProductCard product={product} onAdd={onAdd} />);
+    render(
+      <MemoryRouter>
+        <ProductCard product={product} onAdd={onAdd} />
+      </MemoryRouter>
+    );
 
     expect(screen.getByText("En kraftfull laptop")).toBeInTheDocument();
   });
@@ -52,7 +61,11 @@ describe("ProductCard-tester", () => {
 
     const onAdd = vi.fn();
 
-    render(<ProductCard product={product} onAdd={onAdd} />);
+    render(
+      <MemoryRouter>
+        <ProductCard product={product} onAdd={onAdd} />
+      </MemoryRouter>
+    );
 
     expect(screen.getByText("2500 kr")).toBeInTheDocument();
   });
@@ -70,7 +83,11 @@ describe("ProductCard-tester", () => {
 
     const onAdd = vi.fn();
 
-    render(<ProductCard product={product} onAdd={onAdd} />);
+    render(
+      <MemoryRouter>
+        <ProductCard product={product} onAdd={onAdd} />
+      </MemoryRouter>
+    );
 
     fireEvent.click(screen.getByRole("button"));
 

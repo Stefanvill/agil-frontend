@@ -30,6 +30,21 @@ export async function getProducts(): Promise<productType[]> {
   return data;
 }
 
+export async function getProductById(id: string): Promise<productType> {
+  const token = getToken();
+  const response = await fetch(`${API_URL}/products/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  if (!response.ok) {
+    throw new Error("Could not get product");
+  }
+  const data = await response.json();
+
+  return data;
+}
+
 export async function createProduct(
   product: CreateProductRequest,
 ): Promise<productType> {
