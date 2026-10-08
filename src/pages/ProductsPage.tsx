@@ -1,13 +1,22 @@
 import { useEffect, useState } from "react";
 import type { CartItem, productType } from "../types/product";
 import { getProducts } from "../service/productService";
+import { createOrder } from "../service/orderService";
 import ProductCard from "../components/ProductCard";
 import Cart from "../components/Cart";
 
 export function ProductsPage() {
   const [products, setProducts] = useState<productType[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [cartItems, setCartItems] = useState<CartItem[]>(() => {
+    const savedCart = sessionStorage.getItem("cart");
+
+    if (savedCart) {
+      return JSON.parse(savedCart);
+    }
+
+    return [];
+  });
   const [showCart, setShowCart] = useState(false);
   const [selectedSearch, setSelectedSearch] = useState<string | "">("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -37,6 +46,10 @@ export function ProductsPage() {
     }
     loadProducts();
   }, []);
+
+  useEffect(() => {
+    sessionStorage.setItem("cart", JSON.stringify(cartItems));
+  }, [cartItems]);
 
   function addToCart(product: productType) {
     const index = cartItems.findIndex((item) => item.id === product.id);
@@ -105,6 +118,31 @@ export function ProductsPage() {
     setCartItems(updatedItems);
   }
 
+  async function handleCheckout() {
+    if (cartItems.length === 0) {
+      alert("Kundvagnen är tom.");
+      return;
+    }
+
+    const orderRequest = {
+      items: cartItems.map((item) => ({
+        productId: item.id,
+        quantity: item.quantity,
+      })),
+    };
+
+    try {
+      await createOrder(orderRequest);
+
+      setCartItems([]);
+      sessionStorage.removeItem("cart");
+
+      alert("Ordern har skapats.");
+    } catch {
+      alert("Något gick fel ordenskulle skapas.");
+    }
+  }
+
   return (
     <div>
       <h1>Products</h1>
@@ -137,6 +175,7 @@ export function ProductsPage() {
           item={cartItems}
           onIncrease={increaseQuantity}
           onDecrease={decreaseQuantity}
+          onCheckout={handleCheckout}
         />
       )}
 
