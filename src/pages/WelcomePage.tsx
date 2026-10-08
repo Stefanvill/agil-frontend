@@ -4,7 +4,7 @@ export function WelcomePage() {
   const storedResponse = sessionStorage.getItem("loginResponse");
 
   if (storedResponse === null) {
-    return <h1>Ingen inloggad användare hittades.</h1>;
+    return <h1>No logged-in user found.</h1>;
   }
 
   const loginResponse: LoginResponse = JSON.parse(storedResponse);

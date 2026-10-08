@@ -9,6 +9,8 @@ import { WelcomePage } from "./pages/WelcomePage";
 import { ProductsPage } from "./pages/ProductsPage";
 import { AdminPage } from "./pages/AdminPage";
 import AdminProductPage from "./pages/AdminProductPage";
+import { NotFoundPage } from "./pages/NotFoundPage";
+import { ProductDetailPage } from "./pages/ProductDetailPage";
 
 function HomePage() {
   return <h1>Home page</h1>;
@@ -36,6 +38,16 @@ function App() {
           />
 
           <Route
+  path="/products/:id"
+  element={
+    <ProtectedRoute>
+      <ProductDetailPage/>
+    </ProtectedRoute>
+  }
+/>
+
+
+          <Route
             path="/admin"
             element={
               <ProtectedRoute requiredRole="ADMIN">
@@ -61,6 +73,9 @@ function App() {
               </ProtectedRoute>
             }
           />
+
+          <Route path="*" element={<NotFoundPage />} />
+
         </Routes>
       </main>
 

@@ -18,14 +18,30 @@ export function ProductsPage() {
     return [];
   });
   const [showCart, setShowCart] = useState(false);
+  const [selectedSearch, setSelectedSearch] = useState<string | "">("");
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
+  const categories = products.map((product) => product.category);
+  const uniqueCategories = [...new Set(categories)];
+  console.log(uniqueCategories);
+  const search = selectedSearch.toLowerCase();
+
+  const filteredProducts = products.filter((product) => {
+    const matchesCategory =
+      selectedCategory === null || product.category === selectedCategory;
+    const matchesSearch =
+      product.name.toLowerCase().includes(search) ||
+      product.description.toLowerCase().includes(search);
+    //
+    return matchesCategory && matchesSearch;
+  });
   useEffect(() => {
     async function loadProducts() {
       try {
         const data = await getProducts();
         setProducts(data);
       } catch /*(error)*/ {
-        setError("Can not get the procduct.");
+        setError("Could not load the products.");
       }
     }
     loadProducts();
@@ -41,14 +57,14 @@ export function ProductsPage() {
     if (index === -1) {
       const newItem = { ...product, quantity: 1 };
       setCartItems([...cartItems, newItem]);
-      alert(`${product.name} har lagts i kundvagnen`);
+      alert(`${product.name} has been added to the cart`);
       return;
     }
 
     const currentItem = cartItems[index];
 
     if (currentItem.quantity >= currentItem.stock) {
-      alert("Det finns inte fler produkter i lager.");
+      alert("No more items in stock.");
       return;
     }
 
@@ -61,7 +77,7 @@ export function ProductsPage() {
 
     setCartItems(updatedItems);
 
-    alert(`${product.name} har lagts i kundvagnen`);
+    alert(`${product.name} has been added to the cart`);
   }
 
   function decreaseQuantity(productId: number) {
@@ -90,7 +106,7 @@ export function ProductsPage() {
     const currentItem = cartItems[index];
 
     if (currentItem.quantity >= currentItem.stock) {
-      alert("Det finns inte fler produkter i lager.");
+      alert("No more items in stock.");
       return;
     }
 
@@ -129,11 +145,30 @@ export function ProductsPage() {
 
   return (
     <div>
-      <h1>Produkter</h1>
+      <h1>Products</h1>
+      <input
+        type="search"
+        placeholder="Search products..."
+        value={selectedSearch}
+        onChange={(e) => setSelectedSearch(e.target.value)}
+      />
+
+      <select
+        value={selectedCategory ?? ""}
+        onChange={(e) => setSelectedCategory(e.target.value || null)}
+      >
+        <option value="">All categories</option>
+
+        {uniqueCategories.map((category) => (
+          <option key={category} value={category}>
+            {category}
+          </option>
+        ))}
+      </select>
 
       {error && <p>{error}</p>}
 
-      {!error && products.length === 0 && <p>Inga produkter hittades.</p>}
+      {!error && products.length === 0 && <p>No products found.</p>}
 
       {showCart && (
         <Cart
@@ -145,11 +180,11 @@ export function ProductsPage() {
       )}
 
       {!error &&
-        products.map((product) => (
+        filteredProducts.map((product) => (
           <ProductCard key={product.id} product={product} onAdd={addToCart} />
         ))}
       <button onClick={() => setShowCart(!showCart)}>
-        {showCart ? "Dölj kundvagn" : "Visa kundvagn"}
+        {showCart ? "Hide cart" : "Show cart"}
       </button>
     </div>
   );
