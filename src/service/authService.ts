@@ -27,6 +27,7 @@ export async function login(credentials: LoginRequest): Promise<LoginResponse> {
 
 export function logout() {
   sessionStorage.removeItem(TOKEN_KEY);
+  sessionStorage.removeItem("loginResponse");
 }
 
 export function getToken(): string | null {
