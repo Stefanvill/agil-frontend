@@ -13,6 +13,8 @@ import { PaymentPage } from "./pages/PaymentPage";
 import { CheckoutPage } from "./pages/CheckoutPage";
 import { PaymentResultPage } from "./pages/PaymentResultPage";
 import { OrderConfirmationPage } from "./pages/OrderConfirmationPage";
+import { NotFoundPage } from "./pages/NotFoundPage";
+import { ProductDetailPage } from "./pages/ProductDetailPage";
 
 function HomePage() {
   return <h1>Home page</h1>;
@@ -44,6 +46,16 @@ function App() {
               </ProtectedRoute>
             }
           />
+
+          <Route
+  path="/products/:id"
+  element={
+    <ProtectedRoute>
+      <ProductDetailPage/>
+    </ProtectedRoute>
+  }
+/>
+
 
           <Route
             path="/admin"
@@ -107,6 +119,8 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route path="*" element={<NotFoundPage />} />
+
         </Routes>
       </main>
 

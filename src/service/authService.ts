@@ -12,9 +12,9 @@ export async function login(credentials: LoginRequest): Promise<LoginResponse> {
 
   if (!response.ok) {
     if (response.status == 401 || response.status === 403) {
-      throw new Error("Fel användarnamn eller lösenord");
+      throw new Error("Wrong username or password");
     }
-    throw new Error("Något gick fel");
+    throw new Error("Something went wrong");
   }
 
   const data: LoginResponse = await response.json();

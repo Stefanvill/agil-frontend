@@ -16,7 +16,7 @@ export function Header() {
 
   return (
     <header className="header">
-      <h1>Grupp 1 - WebShop</h1>
+      <h1>Group 1 - WebShop</h1>
 
       <nav className="header-links">
         <Link to="/">Home</Link>
