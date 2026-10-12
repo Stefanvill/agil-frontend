@@ -7,6 +7,8 @@ type ProductCardProps = {
 };
 
 function ProductCard({ product, onAdd }: ProductCardProps) {
+  const isSoldOut = product.stock <= 0;
+
   return (
     <article>
       <img src={product.imageUrl} alt={product.name} />
@@ -14,7 +16,10 @@ function ProductCard({ product, onAdd }: ProductCardProps) {
       {product.category && <small>Category: {product.category}</small>}
       <p>{product.description}</p>
       <strong>{product.price} kr</strong>
-      <button onClick={() => onAdd(product)}>Add to cart</button>
+      {isSoldOut ? <p>Sold out</p> : <p>{product.stock} st in stock</p>}
+      <button onClick={() => onAdd(product)} disabled={isSoldOut}>
+        {isSoldOut ? "Sold out" : "Add to cart"}
+      </button>
       <Link to={`/products/${product.id}`}>Show product</Link>
     </article>
   );
