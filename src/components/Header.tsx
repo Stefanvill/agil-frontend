@@ -10,9 +10,9 @@ export function Header() {
   const hasAccess = isAdmin || isUser;
 
   const handleLogout = () => {
-  logout();
-  navigate("/login");
-};
+    logout();
+    navigate("/login");
+  };
 
   return (
     <header className="header">
@@ -25,9 +25,10 @@ export function Header() {
         {hasAccess && (
           <>
             <Link to="/products">Products</Link>
-            <Link to="/logout" onClick={handleLogout}>
+
+            <button type="button" onClick={handleLogout}>
               Logout
-            </Link>
+            </button>
 
             {isAdmin && <Link to="/admin">Admin</Link>}
           </>
