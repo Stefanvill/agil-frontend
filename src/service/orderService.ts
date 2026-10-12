@@ -16,7 +16,8 @@ export const createOrder = async (order: CreateOrderRequest) => {
   });
 
   if (!response.ok) {
-    throw new Error("Can not create the order.");
+    const errorMessage = await response.text();
+    throw new Error(errorMessage || "Can not create the order.");
   }
 
   const data = await response.json();
