@@ -1,12 +1,11 @@
 import { getToken } from "./authService";
 import type { CreateOrderRequest } from "../types/order";
-
-const API_URL = import.meta.env.VITE_API_ORDER_SERVICE_URL;
+import { API_BASE } from "./apiConfig";
 
 export const createOrder = async (order: CreateOrderRequest) => {
   const token = getToken();
 
-  const response = await fetch(`${API_URL}/orders`, {
+  const response = await fetch(`${API_BASE}/orders`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

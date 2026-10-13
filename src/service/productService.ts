@@ -1,7 +1,6 @@
 import type { productType } from "../types/product";
 import { getToken } from "./authService";
-
-const API_URL = import.meta.env.VITE_API_PRODUCT_SERVICE_URL;
+import { API_BASE } from "./apiConfig";
 
 export type CreateProductRequest = {
   name: string;
@@ -15,7 +14,7 @@ export type CreateProductRequest = {
 export async function getProducts(): Promise<productType[]> {
   const token = getToken();
 
-  const response = await fetch(`${API_URL}/products`, {
+  const response = await fetch(`${API_BASE}/products`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -32,7 +31,7 @@ export async function getProducts(): Promise<productType[]> {
 
 export async function getProductById(id: string): Promise<productType> {
   const token = getToken();
-  const response = await fetch(`${API_URL}/products/${id}`, {
+  const response = await fetch(`${API_BASE}/products/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -50,7 +49,7 @@ export async function createProduct(
 ): Promise<productType> {
   const token = getToken();
 
-  const response = await fetch(`${API_URL}/products`, {
+  const response = await fetch(`${API_BASE}/products`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
