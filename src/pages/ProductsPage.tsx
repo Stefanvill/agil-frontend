@@ -138,8 +138,12 @@ export function ProductsPage() {
       sessionStorage.removeItem("cart");
 
       alert("The order has been created.");
-    } catch {
-      alert("Something whent wrong with creating the order.");
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(error.message);
+      } else {
+        alert("Something whent wrong with creating the order.");
+      }
     }
   }
 
