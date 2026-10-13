@@ -18,7 +18,6 @@ export async function login(credentials: LoginRequest): Promise<LoginResponse> {
   }
 
   const data: LoginResponse = await response.json();
-  console.log(data);
   sessionStorage.setItem(TOKEN_KEY, data.token);
   sessionStorage.setItem("loginResponse", JSON.stringify(data));
 
