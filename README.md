@@ -30,3 +30,7 @@ If you are developing a production application, we recommend enabling type-aware
 ```
 
 See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+
+## Environment variables
+
+- `VITE_API_GATEWAY_URL` - Base URL for API requests (for example `http://localhost:8080`).
