@@ -1,6 +1,6 @@
 import type { LoginRequest, LoginResponse } from "../types/auth";
+import { API_BASE } from "./apiConfig";
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL;
 const TOKEN_KEY = "access_token";
 
 export async function login(credentials: LoginRequest): Promise<LoginResponse> {
@@ -18,7 +18,6 @@ export async function login(credentials: LoginRequest): Promise<LoginResponse> {
   }
 
   const data: LoginResponse = await response.json();
-  console.log(data);
   sessionStorage.setItem(TOKEN_KEY, data.token);
   sessionStorage.setItem("loginResponse", JSON.stringify(data));
 
