@@ -1,6 +1,7 @@
 import type { LoginRequest, LoginResponse } from "../types/auth";
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL;
+const API_BASE = import.meta.env.VITE_GATEWAY_URL;
+console.log("API_BASE =", API_BASE);
 const TOKEN_KEY = "access_token";
 
 export async function login(credentials: LoginRequest): Promise<LoginResponse> {
