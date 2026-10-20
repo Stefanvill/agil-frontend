@@ -11,6 +11,7 @@ describe("ProductCard-tester", () => {
       price: 2500,
       stock: 10,
       category: "Laptop",
+      imageUrl: "https://example.com/laptop.jpg",
     };
 
     const onAdd = vi.fn();
@@ -28,6 +29,7 @@ describe("ProductCard-tester", () => {
       price: 2500,
       stock: 10,
       category: "Laptop",
+      imageUrl: "https://example.com/laptop.jpg",
     };
 
     const onAdd = vi.fn();
@@ -45,6 +47,7 @@ describe("ProductCard-tester", () => {
       price: 2500,
       stock: 10,
       category: "Laptop",
+      imageUrl: "https://example.com/laptop.jpg",
     };
 
     const onAdd = vi.fn();
@@ -62,6 +65,7 @@ describe("ProductCard-tester", () => {
       price: 2500,
       stock: 10,
       category: "Laptop",
+      imageUrl: "https://example.com/laptop.jpg",
     };
 
     const onAdd = vi.fn();
