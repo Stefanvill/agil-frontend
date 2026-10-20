@@ -11,7 +11,7 @@ export function AdminPage() {
   const navigate = useNavigate();
 
   const handleAdd = (product: productType) => {
-    console.log("Produkt tillagd i kundvagnen:", product.name);
+    console.log("Product added to cart:", product.name);
   };
 
   useEffect(() => {
@@ -20,7 +20,7 @@ export function AdminPage() {
         const data = await getProducts();
         setProducts(data);
       } catch {
-        setError("Det gick inte att hämta produkterna.");
+        setError("Could not load the products.");
       }
     }
 
@@ -29,15 +29,15 @@ export function AdminPage() {
 
   return (
     <div>
-      <h1>Produkter</h1>
+      <h1>Products</h1>
 
       <button onClick={() => navigate("/admin/product")}>
-        Lägg till produkt
+        Add product
       </button>
 
       {error && <p>{error}</p>}
 
-      {!error && products.length === 0 && <p>Inga produkter hittades.</p>}
+      {!error && products.length === 0 && <p>No products found.</p>}
 
       {!error &&
         products.map((product) => (

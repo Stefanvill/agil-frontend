@@ -10,7 +10,7 @@ function AdminProductPage() {
 
   return (
     <div>
-      <h1>Lägg till produkt</h1>
+      <h1>Add product</h1>
 
       <ProductForm onSuccess={handleSuccess} />
     </div>

@@ -1,7 +1,5 @@
 import type { LoginRequest, LoginResponse } from "../types/auth";
-
-const API_BASE = import.meta.env.VITE_GATEWAY_URL;
-console.log("API_BASE =", API_BASE);
+import { API_BASE } from "./apiConfig";
 const TOKEN_KEY = "access_token";
 
 export async function login(credentials: LoginRequest): Promise<LoginResponse> {
@@ -13,13 +11,12 @@ export async function login(credentials: LoginRequest): Promise<LoginResponse> {
 
   if (!response.ok) {
     if (response.status == 401 || response.status === 403) {
-      throw new Error("Fel användarnamn eller lösenord");
+      throw new Error("Wrong username or password");
     }
-    throw new Error("Något gick fel");
+    throw new Error("Something went wrong");
   }
 
   const data: LoginResponse = await response.json();
-  console.log(data);
   sessionStorage.setItem(TOKEN_KEY, data.token);
   sessionStorage.setItem("loginResponse", JSON.stringify(data));
 
@@ -28,6 +25,7 @@ export async function login(credentials: LoginRequest): Promise<LoginResponse> {
 
 export function logout() {
   sessionStorage.removeItem(TOKEN_KEY);
+  sessionStorage.removeItem("loginResponse");
 }
 
 export function getToken(): string | null {

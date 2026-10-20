@@ -7,6 +7,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      VITE_API_GATEWAY_URL: http://localhost:8080
 
     strategy:
       matrix:

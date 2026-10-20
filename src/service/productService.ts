@@ -1,7 +1,6 @@
 import type { productType } from "../types/product";
 import { getToken } from "./authService";
-
-const API_URL = import.meta.env.VITE_API_PRODUCT_SERVICE_URL;
+import { API_BASE } from "./apiConfig";
 
 export type CreateProductRequest = {
   name: string;
@@ -15,16 +14,31 @@ export type CreateProductRequest = {
 export async function getProducts(): Promise<productType[]> {
   const token = getToken();
 
-  const response = await fetch(`${API_URL}/products`, {
+  const response = await fetch(`${API_BASE}/products`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
 
   if (!response.ok) {
-    throw new Error("Kunde inte hämta produkterna.");
+    throw new Error("Could not fetch the products.");
   }
 
+  const data = await response.json();
+
+  return data;
+}
+
+export async function getProductById(id: string): Promise<productType> {
+  const token = getToken();
+  const response = await fetch(`${API_BASE}/products/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  if (!response.ok) {
+    throw new Error("Could not get product");
+  }
   const data = await response.json();
 
   return data;
@@ -35,7 +49,7 @@ export async function createProduct(
 ): Promise<productType> {
   const token = getToken();
 
-  const response = await fetch(`${API_URL}/products`, {
+  const response = await fetch(`${API_BASE}/products`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -45,7 +59,7 @@ export async function createProduct(
   });
 
   if (!response.ok) {
-    throw new Error("Kunde inte skapa produkten.");
+    throw new Error("Could not create the product.");
   }
 
   const data = await response.json();
