@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { login } from "../service/authService";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 export default function LoginForm() {
   const [username, setUsername] = useState("");
