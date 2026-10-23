@@ -1,17 +1,23 @@
-import { Link, useLocation, useNavigate } from "react-router";
-import { hasRole, logout } from "../service/authService";
+import { Link, useNavigate } from "react-router";
+import { logout } from "../service/authService";
+import { useAuth } from "../context/AuthContext";
 
 export function Header() {
-  useLocation();
   const navigate = useNavigate();
 
-  const isAdmin = hasRole("ADMIN");
-  const isUser = hasRole("USER");
+  const { user, loading, setUser } = useAuth();
+
+  const isAdmin = user?.roles.includes("ADMIN") ?? false;
+  const isUser = user?.roles.includes("USER") ?? false;
   const hasAccess = isAdmin || isUser;
 
-  const handleLogout = () => {
-    logout();
-    navigate("/login");
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } finally {
+      setUser(null);
+      navigate("/login");
+    }
   };
 
   return (
@@ -22,19 +28,23 @@ export function Header() {
         <Link to="/">Home</Link>
         <Link to="/about">About</Link>
 
-        {hasAccess && (
+        {!loading && (
           <>
-            <Link to="/products">Products</Link>
+            {hasAccess && (
+              <>
+                <Link to="/products">Products</Link>
 
-            <button type="button" onClick={handleLogout}>
-              Logout
-            </button>
+                <button type="button" onClick={handleLogout}>
+                  Logout
+                </button>
 
-            {isAdmin && <Link to="/admin">Admin</Link>}
+                {isAdmin && <Link to="/admin">Admin</Link>}
+              </>
+            )}
+
+            {!hasAccess && <Link to="/login">Login</Link>}
           </>
         )}
-
-        {!hasAccess && <Link to="/login">Login</Link>}
       </nav>
     </header>
   );

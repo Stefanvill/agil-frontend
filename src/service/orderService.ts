@@ -1,17 +1,14 @@
-import { getToken } from "./authService";
 import type { CreateOrderRequest } from "../types/order";
 import { API_BASE } from "./apiConfig";
 
 export const createOrder = async (order: CreateOrderRequest) => {
-  const token = getToken();
-
   const response = await fetch(`${API_BASE}/orders`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(order),
+    credentials: "include",
   });
 
   if (!response.ok) {
