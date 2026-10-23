@@ -1,6 +1,5 @@
 import type { LoginRequest, LoginResponse } from "../types/auth";
 import { API_BASE } from "./apiConfig";
-const TOKEN_KEY = "access_token";
 
 export async function login(credentials: LoginRequest): Promise<LoginResponse> {
   const response = await fetch(`${API_BASE}/auth/login`, {
@@ -11,40 +10,43 @@ export async function login(credentials: LoginRequest): Promise<LoginResponse> {
   });
 
   if (!response.ok) {
-    if (response.status == 401 || response.status === 403) {
+    if (response.status === 401 || response.status === 403) {
       throw new Error("Wrong username or password");
     }
     throw new Error("Something went wrong");
   }
 
   const data: LoginResponse = await response.json();
-  sessionStorage.setItem(TOKEN_KEY, data.token);
   sessionStorage.setItem("loginResponse", JSON.stringify(data));
 
   return data;
 }
 
-export function logout() {
-  sessionStorage.removeItem(TOKEN_KEY);
-  sessionStorage.removeItem("loginResponse");
+export async function logout(): Promise<void> {
+  try {
+    await fetch(`${API_BASE}/auth/logout`, {
+      method: "POST",
+      credentials: "include",
+    });
+  } finally {
+    sessionStorage.removeItem("loginResponse");
+    sessionStorage.removeItem("username");
+  }
 }
 
-export function getToken(): string | null {
-  return sessionStorage.getItem(TOKEN_KEY);
-}
+export async function restoreSession(): Promise<LoginResponse | null> {
+  const response = await fetch(`${API_BASE}/auth/me`, {
+    credentials: "include",
+  });
 
-export function isAuthenticated(): boolean {
-  return getToken() !== null;
-}
-
-export function hasRole(requiredRole: string): boolean {
-  const storedResponse = sessionStorage.getItem("loginResponse");
-
-  if (storedResponse === null) {
-    return false;
+  if (!response.ok) {
+    sessionStorage.removeItem("loginResponse");
+    return null;
   }
 
-  const loginResponse: LoginResponse = JSON.parse(storedResponse);
+  const data: LoginResponse = await response.json();
 
-  return loginResponse.roles.includes(requiredRole);
+  sessionStorage.setItem("loginResponse", JSON.stringify(data));
+
+  return data as LoginResponse;
 }

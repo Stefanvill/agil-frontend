@@ -1,5 +1,4 @@
 import type { productType } from "../types/product";
-import { getToken } from "./authService";
 import { API_BASE } from "./apiConfig";
 
 export type CreateProductRequest = {
@@ -12,12 +11,8 @@ export type CreateProductRequest = {
 };
 
 export async function getProducts(): Promise<productType[]> {
-  const token = getToken();
-
   const response = await fetch(`${API_BASE}/products`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
+    credentials: "include",
   });
 
   if (!response.ok) {
@@ -30,11 +25,8 @@ export async function getProducts(): Promise<productType[]> {
 }
 
 export async function getProductById(id: string): Promise<productType> {
-  const token = getToken();
   const response = await fetch(`${API_BASE}/products/${id}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
+    credentials: "include",
   });
   if (!response.ok) {
     throw new Error("Could not get product");
@@ -47,15 +39,13 @@ export async function getProductById(id: string): Promise<productType> {
 export async function createProduct(
   product: CreateProductRequest,
 ): Promise<productType> {
-  const token = getToken();
-
   const response = await fetch(`${API_BASE}/products`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(product),
+    credentials: "include",
   });
 
   if (!response.ok) {
