@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { login } from "../service/authService";
 import { useNavigate } from "react-router";
+import { useAuth } from "../context/AuthContext";
 
 export default function LoginForm() {
   const [username, setUsername] = useState("");
@@ -8,6 +9,7 @@ export default function LoginForm() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const { setUser } = useAuth();
   const navigate = useNavigate();
 
   async function handleSubmit(e: React.FormEvent) {
@@ -21,11 +23,8 @@ export default function LoginForm() {
         password,
       });
 
+      setUser(loginResponse);
       sessionStorage.setItem("username", username);
-      sessionStorage.setItem(
-        "loginResponse",
-        JSON.stringify(loginResponse)
-      );
 
       navigate("/welcome");
     } catch (error) {
@@ -41,7 +40,6 @@ export default function LoginForm() {
 
   return (
     <form onSubmit={handleSubmit} className="login-form">
-
       <div className="login-field">
         <label htmlFor="username">Username</label>
         <input
@@ -72,14 +70,9 @@ export default function LoginForm() {
         </p>
       )}
 
-      <button
-        type="submit"
-        disabled={loading}
-        className="login-button"
-      >
+      <button type="submit" disabled={loading} className="login-button">
         {loading ? "Logging in..." : "Log in"}
       </button>
-
     </form>
   );
 }
