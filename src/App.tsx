@@ -16,17 +16,31 @@ import { OrderConfirmationPage } from "./pages/OrderConfirmationPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { ProductDetailPage } from "./pages/ProductDetailPage";
 import { AuthProvider } from "./context/AuthContext";
+import { useState } from "react";
+import CookieBanner from "./components/CookieBanner";
 
 function HomePage() {
   return <h1>Home page</h1>;
 }
 
 function App() {
+  const [cookieInfoOpen, setCookieInfoOpen] = useState(
+    () => localStorage.getItem("cookieInfoDismissed") !== "true",
+  );
+
+  function closeCookieInfo() {
+    localStorage.setItem("cookieInfoDismissed", "true");
+    setCookieInfoOpen(false);
+  }
+
+  function openCookieInfo() {
+    setCookieInfoOpen(true);
+  }
+
   return (
     <AuthProvider>
       <div className="app">
         <Header />
-
         <main>
           <Routes>
             <Route path="/" element={<HomePage />} />
@@ -123,8 +137,8 @@ function App() {
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </main>
-
-        <Footer />
+        <Footer onCookieInfoClick={openCookieInfo} />{" "}
+        {cookieInfoOpen && <CookieBanner onClose={closeCookieInfo} />}
       </div>
     </AuthProvider>
   );
