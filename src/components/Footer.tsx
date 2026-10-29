@@ -12,7 +12,7 @@ const Footer = ({ onCookieInfoClick }: FooterProps) => {
         className="cookie-info-link"
         onClick={onCookieInfoClick}
       >
-        Information om cookies
+        Information about cookies
       </button>
     </footer>
   );
