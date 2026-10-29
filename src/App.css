@@ -368,7 +368,7 @@ main {
 
 .confirmation-section h2 {
   margin-bottom: 16px;
-  color: #40534C;
+  color: #40534c;
   font-size: 22px;
 }
 
@@ -392,7 +392,7 @@ main {
 }
 
 .payment-button-secondary {
-  background-color: #40534C;
+  background-color: #40534c;
   color: white;
 }
 
@@ -423,4 +423,64 @@ main {
 
 .header-links button:hover {
   text-decoration: underline;
+}
+
+.cookie-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding: 18px 24px;
+  background-color: #e5f0eb;
+  color: #26332f;
+  border-top: 1px solid #b6d6cc;
+}
+
+.cookie-banner-text {
+  max-width: 850px;
+}
+
+.cookie-banner-text strong {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.cookie-banner-text p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.cookie-banner-close,
+.cookie-info-link {
+  border: 1px solid #b6d6cc;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.cookie-banner-close {
+  flex-shrink: 0;
+  background-color: #40534c;
+  color: white;
+}
+
+.cookie-banner-close:hover {
+  background-color: #26332f;
+}
+
+.cookie-info-link {
+  background: transparent;
+  color: white;
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .cookie-banner {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+  }
 }
