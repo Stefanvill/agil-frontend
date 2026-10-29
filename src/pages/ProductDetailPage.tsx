@@ -26,7 +26,7 @@ export function ProductDetailPage() {
   if (!product) return <p>Loading...</p>;
 
   return (
-    <article>
+    <article className="product-detail-page">
       <Link to="/products">Back to Products page</Link>
       <h1>{product.name}</h1>
       {product.category && <p>Category: {product.category}</p>}

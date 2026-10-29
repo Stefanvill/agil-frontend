@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import {
   createProduct,
@@ -33,7 +34,7 @@ function ProductForm({ onSuccess }: ProductFormProps) {
     }));
   }
 
-  async function handleSubmit(event: React.FormEvent) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     setError(null);
@@ -75,8 +76,6 @@ function ProductForm({ onSuccess }: ProductFormProps) {
       await createProduct(formData);
 
       setSuccess("Product created!");
-
-
       onSuccess();
     } catch {
       setError("Could not create the product.");
@@ -86,8 +85,8 @@ function ProductForm({ onSuccess }: ProductFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
+    <form className="product-form" onSubmit={handleSubmit}>
+      <div className="product-form-field">
         <label htmlFor="name">Name</label>
         <input
           id="name"
@@ -99,7 +98,7 @@ function ProductForm({ onSuccess }: ProductFormProps) {
         />
       </div>
 
-      <div>
+      <div className="product-form-field">
         <label htmlFor="description">Description</label>
         <textarea
           id="description"
@@ -110,11 +109,11 @@ function ProductForm({ onSuccess }: ProductFormProps) {
         />
       </div>
 
-      <div>
-        <label htmlFor={"category"}>Category</label>
+      <div className="product-form-field">
+        <label htmlFor="category">Category</label>
         <input
-          id={"category"}
-          name={"category"}
+          id="category"
+          name="category"
           type="text"
           value={formData.category}
           onChange={handleChange}
@@ -122,7 +121,7 @@ function ProductForm({ onSuccess }: ProductFormProps) {
         />
       </div>
 
-      <div>
+      <div className="product-form-field">
         <label htmlFor="imageUrl">Image URL</label>
         <input
           id="imageUrl"
@@ -134,7 +133,7 @@ function ProductForm({ onSuccess }: ProductFormProps) {
         />
       </div>
 
-      <div>
+      <div className="product-form-field">
         <label htmlFor="price">Price</label>
         <input
           id="price"
@@ -148,23 +147,37 @@ function ProductForm({ onSuccess }: ProductFormProps) {
         />
       </div>
 
-      <div>
+      <div className="product-form-field">
         <label htmlFor="stock">Stock</label>
         <input
           id="stock"
           name="stock"
           type="number"
           min="0"
+          step="1"
           value={formData.stock}
           onChange={handleChange}
           disabled={loading}
         />
       </div>
 
-      {error && <p>{error}</p>}
-      {success && <p>{success}</p>}
+      {error && (
+        <p className="product-form-error" role="alert">
+          {error}
+        </p>
+      )}
 
-      <button type="submit" disabled={loading}>
+      {success && (
+        <p className="product-form-success" role="status">
+          {success}
+        </p>
+      )}
+
+      <button
+        className="product-form-submit"
+        type="submit"
+        disabled={loading}
+      >
         {loading ? "Creating product..." : "Create product"}
       </button>
     </form>
