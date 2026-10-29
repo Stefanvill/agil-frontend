@@ -5,6 +5,7 @@ import "./App.css";
 import { Route, Routes } from "react-router";
 import { LoginPage } from "./pages/LoginPage";
 import { TestPage } from "./pages/TestPage";
+import AboutPage from "./pages/AboutPage";
 import { WelcomePage } from "./pages/WelcomePage";
 import { ProductsPage } from "./pages/ProductsPage";
 import { AdminPage } from "./pages/AdminPage";
@@ -20,7 +21,19 @@ import { useState } from "react";
 import CookieBanner from "./components/CookieBanner";
 
 function HomePage() {
-  return <h1>Home page</h1>;
+  return (
+    <section className="home-page">
+      <h1>Welcome to our WebShop!</h1>
+      <p>
+        Welcome to our webshop, where you can explore our products
+        and enjoy a simple shopping experience.
+      </p>
+      <p>
+        Please log in to browse our products, view product details,
+        and add items to your shopping cart.
+      </p>
+    </section>
+  );
 }
 
 function App() {
@@ -44,16 +57,10 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/about" element={<AboutPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/test" element={<TestPage />} />
-            <Route path="/payment" element={<PaymentPage />} />
-            <Route path="/checkout" element={<CheckoutPage />} />
-            <Route path="/payment-result" element={<PaymentResultPage />} />
-            <Route
-              path="/order-confirmation"
-              element={<OrderConfirmationPage />}
-            />
-
+           
             <Route
               path="/products"
               element={
@@ -137,7 +144,7 @@ function App() {
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </main>
-        <Footer onCookieInfoClick={openCookieInfo} />{" "}
+        <Footer onCookieInfoClick={openCookieInfo} />
         {cookieInfoOpen && <CookieBanner onClose={closeCookieInfo} />}
       </div>
     </AuthProvider>

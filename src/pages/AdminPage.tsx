@@ -28,21 +28,33 @@ export function AdminPage() {
   }, []);
 
   return (
-    <div>
-      <h1>Products</h1>
+  <div className="admin-page">
+    <h1>Products</h1>
 
-      <button onClick={() => navigate("/admin/product")}>
-        Add product
-      </button>
+    <button
+      className="admin-add-button"
+      onClick={() => navigate("/admin/product")}
+    >
+      Add product
+    </button>
 
-      {error && <p>{error}</p>}
+    {error && <p className="admin-message admin-error">{error}</p>}
 
-      {!error && products.length === 0 && <p>No products found.</p>}
+    {!error && products.length === 0 && (
+      <p className="admin-message">No products found.</p>
+    )}
 
-      {!error &&
-        products.map((product) => (
-          <ProductCard key={product.id} product={product} onAdd={handleAdd} />
+    {!error && products.length > 0 && (
+      <div className="products-grid">
+        {products.map((product) => (
+          <ProductCard
+            key={product.id}
+            product={product}
+            onAdd={handleAdd}
+          />
         ))}
-    </div>
-  );
+      </div>
+    )}
+  </div>
+);
 }

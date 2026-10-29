@@ -147,49 +147,81 @@ export function ProductsPage() {
     }
   }
 
-  return (
-    <div>
-      <h1>Products</h1>
+  
+return (
+  <div className="products-page">
+    <div className="products-header">
+      <div>
+        <h1>Products</h1>
+        <p>Explore our products and find your favourites.</p>
+      </div>
+
+      <button
+        className="cart-toggle-button"
+        onClick={() => setShowCart(!showCart)}
+      >
+        {showCart ? "Hide cart" : `Show cart (${cartItems.length})`}
+      </button>
+    </div>
+
+    <div className="product-filters">
       <input
         type="search"
         placeholder="Search products..."
         value={selectedSearch}
         onChange={(e) => setSelectedSearch(e.target.value)}
+        aria-label="Search products"
       />
 
       <select
         value={selectedCategory ?? ""}
         onChange={(e) => setSelectedCategory(e.target.value || null)}
+        aria-label="Filter by category"
       >
         <option value="">All categories</option>
-
         {uniqueCategories.map((category) => (
           <option key={category} value={category}>
             {category}
           </option>
         ))}
       </select>
+    </div>
 
-      {error && <p>{error}</p>}
+    {error && <p className="products-error">{error}</p>}
 
-      {!error && products.length === 0 && <p>No products found.</p>}
+    {!error && products.length === 0 && (
+      <p className="products-message">No products found.</p>
+    )}
 
-      {showCart && (
+    {!error && products.length > 0 && filteredProducts.length === 0 && (
+      <p className="products-message">
+        No products match your search.
+      </p>
+    )}
+
+    {showCart && (
+      <div className="cart-panel">
         <Cart
           item={cartItems}
           onIncrease={increaseQuantity}
           onDecrease={decreaseQuantity}
           onCheckout={handleCheckout}
         />
-      )}
+      </div>
+    )}
 
-      {!error &&
-        filteredProducts.map((product) => (
-          <ProductCard key={product.id} product={product} onAdd={addToCart} />
+    {!error && filteredProducts.length > 0 && (
+      <div className="products-grid">
+        {filteredProducts.map((product) => (
+          <ProductCard
+            key={product.id}
+            product={product}
+            onAdd={addToCart}
+          />
         ))}
-      <button onClick={() => setShowCart(!showCart)}>
-        {showCart ? "Hide cart" : "Show cart"}
-      </button>
-    </div>
-  );
+      </div>
+    )}
+  </div>
+);
+
 }

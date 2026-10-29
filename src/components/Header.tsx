@@ -34,6 +34,10 @@ export function Header() {
               <>
                 <Link to="/products">Products</Link>
 
+                {isUser && (
+                  <Link to="/checkout">Checkout</Link>
+                )}
+
                 <button type="button" onClick={handleLogout}>
                   Logout
                 </button>

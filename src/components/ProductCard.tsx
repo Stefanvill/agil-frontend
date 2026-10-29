@@ -9,20 +9,49 @@ type ProductCardProps = {
 function ProductCard({ product, onAdd }: ProductCardProps) {
   const isSoldOut = product.stock <= 0;
 
-  return (
-    <article>
-      <img src={product.imageUrl} alt={product.name} />
+  
+return (
+  <article className="product-card">
+    <img
+      className="product-image"
+      src={product.imageUrl}
+      alt={product.name}
+    />
+
+    <div className="product-card-content">
       <h2>{product.name}</h2>
-      {product.category && <small>Category: {product.category}</small>}
-      <p>{product.description}</p>
-      <strong>{product.price} kr</strong>
-      {isSoldOut ? <p>Sold out</p> : <p>{product.stock} st in stock</p>}
-      <button onClick={() => onAdd(product)} disabled={isSoldOut}>
+
+      {product.category && (
+        <small className="product-category">
+          Category: {product.category}
+        </small>
+      )}
+
+      <p className="product-description">{product.description}</p>
+
+      <strong className="product-price">{product.price} kr</strong>
+
+      {isSoldOut ? (
+        <p className="product-stock sold-out">Sold out</p>
+      ) : (
+        <p className="product-stock">{product.stock} st in stock</p>
+      )}
+
+      <button
+        className="product-button"
+        onClick={() => onAdd(product)}
+        disabled={isSoldOut}
+      >
         {isSoldOut ? "Sold out" : "Add to cart"}
       </button>
-      <Link to={`/products/${product.id}`}>Show product</Link>
-    </article>
-  );
+
+      <Link className="product-link" to={`/products/${product.id}`}>
+        Show product
+      </Link>
+    </div>
+  </article>
+);
+
 }
 
 export default ProductCard;
