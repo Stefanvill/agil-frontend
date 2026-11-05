@@ -39,7 +39,11 @@ export async function getProductById(id: string): Promise<productType> {
 export async function createProduct(
   product: CreateProductRequest,
 ): Promise<productType> {
-  const response = await fetch(`${API_BASE}/products`, {
+  const createProductPath = import.meta.env.PROD
+    ? "/products/add"
+    : "/products";
+
+  const response = await fetch(`${API_BASE}${createProductPath}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
